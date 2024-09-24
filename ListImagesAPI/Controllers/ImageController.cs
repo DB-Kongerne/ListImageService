@@ -5,8 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-[Route("api/[controller]")]
+
 [ApiController]
+[Route("[controller]")]
 public class ImageController : ControllerBase
 {
     private readonly string _imagePath;
@@ -17,7 +18,11 @@ public class ImageController : ControllerBase
         _logger = logger;
         _imagePath = configuration["ImagePath"] ?? string.Empty; // Hent miljøvariabel
     }
-
+    [HttpGet ("version")]
+    public IActionResult Version()
+    {
+        return Ok ("1,0,0");
+    } 
     [HttpGet("listImages")]
     public IActionResult ListImages()
     {
